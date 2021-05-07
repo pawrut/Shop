@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Zadanie zaliczeniowe</title>
+    <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div id="app">
+
+        <nav class="nav justify-content-center" style="background-color:azure">
+            <a class="nav-link" href="index.html">Sklep</a>
+            <a class="nav-link" href="index.html">Dostawa</a>
+            <a class="nav-link" href="index.html">Rejestracja</a>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-9 col-md-9 product d-flex justify-content-center flex-wrap mt-2">
+                    <div class="products col-2 d-flex flex-column justify-content-center align-items-center my-2 mx-2"
+                        v-for="(item,key) in list"><img class="mt-2" :src="item.imgUrl" alt="" />
+                        <h5 class="mt-2">{{ item.name }}</h5>
+                        <p>{{ item.discribe }}</p>
+                        <div class="w-100 d-flex justify-content-around align-items-center pb-1">
+                            <span>{{ item.price }} PLN</span>
+                            <input class="btn btn-sm btn-info" type="button" value="Kup" @click="addCart(item)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 cart d-flex mt-2" style="background-color:azure"><span class="empty"
+                        v-if="!cart.length">Koszyk jest pusty!</span>
+
+                    <table class="table table table-light text-center" v-else="v-else">
+                        <tr>
+                            <th><button class="btn btn-sm btn-danger" @click="buy()">Kup</button></th>
+
+                            <th><button class="btn btn-sm btn-danger" @click="sumAll()">Cena koszyka</button></th>
+
+                            <th><button class="btn btn-sm btn-danger" @click="delall()">Wyczyść</button></th>
+                        </tr>
+                        <tr v-for="(item,key) in cart" :key="item.id">
+                            <td>Piesek: {{ item.name }}</td>
+
+                            <td>Cena: {{ item.price}}</td>
+                            <td>
+                                <button class="btn btn-sm btn-danger" @click="del(item)">x</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                </tr>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js'></script>
+    <script src="./script.js"></script>
+
+</body>
+
+</html>
